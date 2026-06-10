@@ -1,0 +1,39 @@
+<div class="parent-container">
+  <div class="posts-container">
+    <header class="posts-header">
+      <h1>Feed de Publicações</h1>
+      <p>Exibindo dados síncronos e integrados da Store global.</p>
+    </header>
+
+    @if (store.loading()) {
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>Carregando conteúdo...</p>
+    </div>
+    }
+
+    <div class="posts-grid">
+      @for (post of store.posts(); track post.id) {
+      <article class="post-card">
+        <div class="actions">
+          <span class="post-id">#{{ post.id || 'Novo' }}</span>
+          <div class="">
+            <button (click)="onEditModal(post)" class="edit-btn" type="button">✏️</button>
+            <button (click)="onRemovePost(post.id)" class="remove-btn" type="button">X</button>
+          </div>
+        </div>
+        <h3 class="post-card-title">{{ post.title }}</h3>
+        <p class="post-card-body">{{ post.body }}</p>
+      </article>
+      } @empty { @if (!store.loading()) {
+      <p class="empty-state">Nenhum post encontrado.</p>
+      } }
+    </div>
+  </div>
+
+  <div class="modal-container">
+    @if(selectedPostForEdit(); as postAtivo ){
+    <app-edit-post-modal [post]="postAtivo" (closeModal)="onCloseModal()" />
+    }
+  </div>
+</div>

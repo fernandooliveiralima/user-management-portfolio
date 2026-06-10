@@ -1,0 +1,122 @@
+.parent-container {
+  
+  .posts-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    font-family: system-ui, sans-serif;
+  }
+
+  .posts-header {
+    margin-bottom: 3rem;
+    text-align: center;
+
+    h1 {
+      color: #1e293b;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: #64748b;
+      font-size: 1.1rem;
+    }
+  }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .post-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    position: relative;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .post-id {
+        font-size: 0.8rem;
+        font-weight: bold;
+        color: #3b82f6;
+        background: #eff6ff;
+        padding: 0.25rem 0.5rem;
+        border-radius: 6px;
+      }
+
+      .edit-btn {
+        background-color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 700;
+      }
+
+      .remove-btn {
+        background-color: white;
+        border: none;
+        color: red;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 700;
+      }
+    }
+
+    &-title {
+      color: #0f172a;
+      font-size: 1.25rem;
+      margin: 1rem 0 0.5rem 0;
+      text-transform: capitalize;
+    }
+
+    &-body {
+      color: #475569;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+  }
+
+  .loading-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 4rem 0;
+    color: #64748b;
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #e2e8f0;
+      border-top-color: #3b82f6;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 1rem;
+    }
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .modal-container{
+    border: solid red 0.1rem;
+  }
+  
+}

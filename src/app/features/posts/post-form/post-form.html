@@ -1,0 +1,40 @@
+<div class="form-container">
+  <div class="form-card">
+    <h2>Criar Nova Publicação</h2>
+    <p class="form-subtitle">Preencha os campos para salvar na store global.</p>
+
+    <form [formRoot]="postForm">
+      <div class="form-group">
+        <label for="form-title">Título do Post</label>
+        <input 
+          type="text" 
+          id="form-title"
+          [formField]="postForm.title" 
+          placeholder="Digite um título chamativo..."
+          [class.invalid]="postForm.title().touched() && postForm.title().invalid()"
+        />
+        @if (postForm.title().touched() && postForm.title().invalid()) {
+          <small class="error-message">O título é obrigatório (mínimo 5 caracteres).</small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="form-body">Conteúdo</label>
+        <textarea 
+          id="form-body"
+          [formField]="postForm.body" 
+          placeholder="Escreva o texto da sua publicação aqui..."
+          rows="5"
+          [class.invalid]="postForm.body().touched() && postForm.body().invalid()"
+        ></textarea>
+        @if (postForm.body().touched() && postForm.body().invalid()) {
+          <small class="error-message">O conteúdo do post não pode ficar vazio.</small>
+        }
+      </div>
+
+      <button class="btn-submit" [disabled]="postForm().invalid()" type="submit">
+        Publicar Post
+      </button>
+    </form>
+  </div>
+</div>
