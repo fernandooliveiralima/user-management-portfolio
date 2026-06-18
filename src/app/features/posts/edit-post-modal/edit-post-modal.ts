@@ -21,7 +21,7 @@ export class EditPostModal {
   post = input.required<Posts>();
   closeModal = output<void>();
 
-  // Estado interno para controlar o formulário e o botão de salvar
+  
   formModel = signal<Posts>({ title: '', body: '' });
   isSaving = signal<boolean>(false);
 

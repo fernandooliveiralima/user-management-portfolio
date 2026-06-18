@@ -18,36 +18,35 @@ describe('UserPosts', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        UserPosts, provideHttpClient(),
-        provideHttpClientTesting()
-      ]
+      providers: [UserPosts, provideHttpClient(), provideHttpClientTesting()],
     });
     service = TestBed.inject(UserPosts);
-    httpMock = TestBed.inject(HttpTestingController)
+    httpMock = TestBed.inject(HttpTestingController);
   });
 
-  afterEach(() => { httpMock.verify() });
+  afterEach(() => {
+    httpMock.verify();
+  });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should fetch posts via GET', () => { 
-    service.getPosts().subscribe(posts => {
+  it('should fetch posts via GET', () => {
+    service.getPosts().subscribe((posts) => {
       expect(posts).toEqual(mockPosts);
       expect(posts.length).toBe(2);
-    })
+    });
 
     const req = httpMock.expectOne(mockUrl);
-    expect(req.request.method).toBe('GET')
+    expect(req.request.method).toBe('GET');
   });
 
   it('should create a new post via POST', () => {
     const newPost = { title: 'Novo Post', body: 'Novo Conteúdo' } as Posts;
-    service.createPost(newPost).subscribe(post => {
-      expect(post).toEqual({id: 3, ...newPost})
-    })
+    service.createPost(newPost).subscribe((post) => {
+      expect(post).toEqual({ id: 3, ...newPost });
+    });
 
     const req = httpMock.expectOne(mockUrl);
     expect(req.request.method).toBe('POST');
@@ -56,10 +55,10 @@ describe('UserPosts', () => {
   });
 
   it('should update an existing post via PUT', () => {
-    const updatedPost = { id: 1, title: 'Post Atualizado'  } as Posts;
-    service.updatePost(1, updatedPost).subscribe(post => {
+    const updatedPost = { id: 1, title: 'Post Atualizado' } as Posts;
+    service.updatePost(1, updatedPost).subscribe((post) => {
       expect(post).toEqual(updatedPost);
-    })
+    });
 
     const req = httpMock.expectOne(`${mockUrl}/1`);
     expect(req.request.method).toBe('PUT');
@@ -68,15 +67,12 @@ describe('UserPosts', () => {
   });
 
   it('should delete a post via DELETE', () => {
-    service.deletePost(1).subscribe(response => {
+    service.deletePost(1).subscribe((response) => {
       expect(response).toBeTruthy();
-    })
+    });
 
     const req = httpMock.expectOne(`${mockUrl}/1`);
     expect(req.request.method).toBe('DELETE');
     req.flush([]);
   });
-  
-  //it('', ()=>{});
-  
 });

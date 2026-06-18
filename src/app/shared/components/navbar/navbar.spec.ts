@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { provideRouter } from '@angular/router'; // 1. Importe o provideRouter
+import { provideRouter } from '@angular/router'; 
 
 import { Navbar } from './navbar';
 
@@ -14,14 +14,14 @@ describe('Navbar', () => {
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
-        provideRouter([]), // 2. Adicione aqui com um array vazio
+        provideRouter([]), 
       ],
       imports: [Navbar],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Navbar);
     component = fixture.componentInstance;
-    fixture.detectChanges(); // É boa prática rodar a detecção de ciclos aqui
+    fixture.detectChanges(); 
   });
 
   it('should create', () => {
