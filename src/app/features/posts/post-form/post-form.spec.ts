@@ -62,7 +62,7 @@ describe('PostForm', () => {
     });
 
     expect(postStoreMock.addPost).toHaveBeenCalledWith(mockCreatedPost);
-    expect(routerMock.navigate).toHaveBeenCalledWith(['']);
+    expect(routerMock.navigate).toHaveBeenCalledWith([""]);
   });
 
   it('should catch error and log to console if API fails during submission', async () => {
