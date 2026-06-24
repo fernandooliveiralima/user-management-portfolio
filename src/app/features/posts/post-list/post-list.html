@@ -13,16 +13,16 @@
 
     <div class="posts-grid">
       @for (post of store.posts(); track post.id) {
-      <article class="post-card">
+      <article class="post-card" data-cy="post-card">
         <div class="actions">
           <span class="post-id">#{{ post.id || 'Novo' }}</span>
           <div class="">
-            <button (click)="onEditModal(post)" class="edit-btn" type="button">✏️</button>
-            <button (click)="onRemovePost(post.id)" class="remove-btn" type="button">X</button>
+            <button (click)="onEditModal(post)" data-cy="edit-btn" class="edit-btn" type="button">✏️</button>
+            <button (click)="onRemovePost(post.id)" data-cy="remove-btn" class="remove-btn" type="button">X</button>
           </div>
         </div>
-        <h3 class="post-card-title">{{ post.title }}</h3>
-        <p class="post-card-body">{{ post.body }}</p>
+        <h3 class="post-card-title" data-cy="post-card-title">{{ post.title }}</h3>
+        <p class="post-card-body" data-cy="post-card-body">{{ post.body }}</p>
       </article>
       } @empty { @if (!store.loading()) {
       <p class="empty-state">Nenhum post encontrado.</p>
