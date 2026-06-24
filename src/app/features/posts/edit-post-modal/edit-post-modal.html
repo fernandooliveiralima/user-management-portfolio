@@ -1,4 +1,4 @@
-<div class="modal-backdrop" (click)="closeModal.emit()">
+<div class="modal-backdrop" data-cy="modal-content" (click)="closeModal.emit()">
   <dialog open class="modal-content" (click)="$event.stopPropagation()">
     <div class="modal-header">
       <h2>Editar Publicação</h2>
@@ -32,9 +32,14 @@
         }
       </div>
 
-      <div class="modal-actions">
+      <div class="modal-actions" data-cy="modal-actions">
         <button type="button" class="btn-cancel" (click)="closeModal.emit()">Cancelar</button>
-        <button type="submit" class="btn-submit" [disabled]="editForm().invalid() || isSaving()">
+        <button
+          type="submit"
+          data-cy="btn-submit"
+          class="btn-submit"
+          [disabled]="editForm().invalid() || isSaving()"
+        >
           {{ isSaving() ? 'Salvando...' : 'Salvar Alterações' }}
         </button>
       </div>
