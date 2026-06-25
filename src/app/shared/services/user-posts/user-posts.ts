@@ -8,7 +8,7 @@ import type { Posts } from '@/shared/types/posts/posts.model';
   providedIn: 'root',
 })
 export class UserPosts {
-  private url = `${environment.apiUrl}posts`;
+  private url = `${environment.apiUrl}/posts`;
   httpClient = inject(HttpClient);
 
   getPosts() {
