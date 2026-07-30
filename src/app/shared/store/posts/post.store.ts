@@ -1,4 +1,5 @@
 import { inject } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { lastValueFrom } from 'rxjs';
 
@@ -32,7 +33,7 @@ export const PostStore = signalStore(
         const data = await lastValueFrom(postService.getPosts());
 
         patchState(store, {
-          posts: [...store.posts(), ...data],
+          posts: [...store.posts(), ...data], 
           loading: false,
           loaded: true, 
         });

@@ -9,12 +9,13 @@
         <input
           type="text"
           id="form-title"
+          data-cy="postForm.title" 
           [formField]="postForm.title"
           placeholder="Digite um título chamativo..."
           [class.invalid]="postForm.title().touched() && postForm.title().invalid()"
         />
         @if (postForm.title().touched() && postForm.title().invalid()) {
-        <small class="error-message">O título é obrigatório (mínimo 5 caracteres).</small>
+        <small class="error-message" data-cy="error-title">O título é obrigatório (mínimo 5 caracteres).</small>
         }
       </div>
 
@@ -22,6 +23,7 @@
         <label for="form-body">Conteúdo</label>
         <textarea
           id="form-body"
+          data-cy="postForm.body"
           [formField]="postForm.body"
           placeholder="Escreva o texto da sua publicação aqui..."
           rows="5"
@@ -32,7 +34,7 @@
         }
       </div>
 
-      <button class="btn-submit" [disabled]="postForm().invalid()" type="submit">
+      <button class="btn-submit" data-cy="btn-submit" [disabled]="postForm().invalid()" type="submit">
         Publicar Post
       </button>
     </form>

@@ -23,7 +23,7 @@ export class UserPosts {
     return this.httpClient.put<Posts>(`${this.url}/${id}`, post);
   }
 
-  deletePost(id: number) { 
+  deletePost(id: number) {
     return this.httpClient.delete<Posts[]>(`${this.url}/${id}`);
-  };
+  }
 }
