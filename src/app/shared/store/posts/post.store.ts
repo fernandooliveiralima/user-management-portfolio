@@ -1,5 +1,4 @@
 import { inject } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
 import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { lastValueFrom } from 'rxjs';
 
@@ -37,12 +36,14 @@ export const PostStore = signalStore(
           loading: false,
           loaded: true, 
         });
+        console.log('posts', data);
       } catch (error) {
+        alert(`Error Api: ${error}`);
         console.error(error);
         patchState(store, { loading: false });
       }
     },
-    
+
     addPost(newPost: Posts) {
       patchState(store, {
         posts: [newPost, ...store.posts()],

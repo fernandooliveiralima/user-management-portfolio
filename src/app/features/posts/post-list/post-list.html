@@ -3,36 +3,61 @@
     <header class="posts-header">
       <h1>Feed de Publicações</h1>
     </header>
-
-    @if (store.loading()) {
-    <div class="loading-state">
-      <div class="spinner"></div>
-      <p>Carregando conteúdo...</p>
-    </div>
+  </div>
+  <div class="count-list-container">
+    @for(item of countList(); track $index){
+    <ul>
+      <li>
+        <button
+          (click)="onSetPage($index)"
+          [class.disabled-btn]="onCurrentPage($index)"
+          class="btn-current-page"
+          [disabled]="onCurrentPage($index)"
+        >
+          {{$index + 1}}
+        </button>
+      </li>
+    </ul>
     }
+  </div>
 
-    <div class="posts-grid">
-      @for (post of store.posts(); track post.id) {
-      <article class="post-card" data-cy="post-card">
-        <div class="actions">
-          <span class="post-id">#{{ post.id || 'Novo' }}</span>
-          <div class="">
-            <button (click)="onEditModal(post)" data-cy="edit-btn" class="edit-btn" type="button">✏️</button>
-            <button (click)="onRemovePost(post.id)" data-cy="remove-btn" class="remove-btn" type="button">X</button>
-          </div>
+  @if (store.loading()) {
+  <div class="loading-state">
+    <div class="spinner"></div>
+    <p>Carregando conteúdo...</p>
+  </div>
+  }
+
+  <div class="posts-grid">
+    @for (post of paginatedPosts(); track post.id) {
+    <article class="post-card" data-cy="post-card">
+      <div class="actions">
+        <span class="post-id">#{{ post.id || 'Novo' }}</span>
+        <div class="">
+          <button (click)="onEditModal(post)" data-cy="edit-btn" class="edit-btn" type="button">
+            ✏️
+          </button>
+          <button
+            (click)="onRemovePost(post.id)"
+            data-cy="remove-btn"
+            class="remove-btn"
+            type="button"
+          >
+            X
+          </button>
         </div>
-        <h3 class="post-card-title" data-cy="post-card-title">{{ post.title }}</h3>
-        <p class="post-card-body" data-cy="post-card-body">{{ post.body }}</p>
-      </article>
-      } @empty { @if (!store.loading()) {
-      <p class="empty-state">Nenhum post encontrado.</p>
-      } }
-    </div>
+      </div>
+      <h3 class="post-card-title" data-cy="post-card-title">{{ post.title }}</h3>
+      <p class="post-card-body" data-cy="post-card-body">{{ post.body }}</p>
+    </article>
+    } @empty { @if (!store.loading()) {
+    <p class="empty-state">Nenhum post encontrado.</p>
+    } }
   </div>
+</div>
 
-  <div class="modal-container">
-    @if(selectedPostForEdit(); as postAtivo ){
-    <app-edit-post-modal [post]="postAtivo" (closeModal)="onCloseModal()" />
-    }
-  </div>
+<div class="modal-container">
+  @if(selectedPostForEdit(); as postAtivo ){
+  <app-edit-post-modal [post]="postAtivo" (closeModal)="onCloseModal()" />
+  }
 </div>

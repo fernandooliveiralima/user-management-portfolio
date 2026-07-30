@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 
 import { UserPosts } from '@/shared/services/user-posts/user-posts';
@@ -17,20 +17,37 @@ export class PostList {
   postService = inject(UserPosts);
 
   selectedPostForEdit = signal<Posts | null>(null);
+  postsPerPage = signal(10);
+  currentPage = signal(0);
+  
+  totalPages = computed<number>(() => Math.ceil(this.store.posts().length / this.postsPerPage()));
+  countList = computed<number[]>(() => Array.from({ length: this.totalPages() }, (_, i) => i));
+  startPostRange = computed(() => this.currentPage() * this.postsPerPage());
+  finalPostRange = computed(() => this.startPostRange() + this.postsPerPage());
+  paginatedPosts = computed(() => this.store.posts().slice(this.startPostRange(), this.finalPostRange()));
 
-   onEditModal(post: Posts) { 
+  onCurrentPage(id: number): boolean {
+    const isCurrentPage = this.currentPage();
+    return isCurrentPage === id;
+  }
+
+  onSetPage(pageIndex: number) { 
+    this.currentPage.set(pageIndex);
+  };
+
+  onEditModal(post: Posts) {
     this.selectedPostForEdit.set(post);
-  };
+  }
 
-  onCloseModal() { 
+  onCloseModal() {
     this.selectedPostForEdit.set(null);
-  };
+  }
 
   async onRemovePost(id: number | undefined) {
     if (!id) return;
 
-    if (confirm("Quer mesmo excluir esse post?")) {
-      try { 
+    if (confirm('Quer mesmo excluir esse post?')) {
+      try {
         await lastValueFrom(this.postService.deletePost(id));
         this.store.removePost(id);
         console.log(`Post #${id} removido com sucesso.`);
@@ -40,8 +57,10 @@ export class PostList {
     }
   }
 
-  ngOnInit() {
-    this.store.loadPosts();
-    this.store.posts();
+  constructor() {
+    effect(() => {
+      this.store.loadPosts();
+      this.store.posts();
+    });
   }
 }
