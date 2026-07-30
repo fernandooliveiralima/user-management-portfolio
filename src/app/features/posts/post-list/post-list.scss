@@ -23,6 +23,32 @@
     }
   }
 
+  .count-list-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    ul{
+      list-style: none;
+
+      li{
+
+        .disabled-btn{
+          background-color: darkslategray;
+          color: #FFF;
+          cursor: not-allowed;
+        }
+        
+        .btn-current-page{
+          border: none;
+          outline: none;
+          padding: 0.3rem 0.5rem;
+          border-radius: 0.3rem;
+        }
+      }
+    }
+  }
+
   .posts-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
