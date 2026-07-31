@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PostList } from '@/features/posts/post-list/post-list';
+import { PostList } from '@/features/posts/postList/post-list/post-list';
 
 @Component({
   selector: 'app-home',

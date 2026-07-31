@@ -4,22 +4,13 @@
       <h1>Feed de Publicações</h1>
     </header>
   </div>
-  <div class="count-list-container">
-    @for(item of countList(); track $index){
-    <ul>
-      <li>
-        <button
-          (click)="onSetPage($index)"
-          [class.disabled-btn]="onCurrentPage($index)"
-          class="btn-current-page"
-          [disabled]="onCurrentPage($index)"
-        >
-          {{$index + 1}}
-        </button>
-      </li>
-    </ul>
-    }
-  </div>
+  <!-- countList Container -->
+  <app-paginate-list
+    [totalItems]="store.posts().length"
+    [itemsPerPage]="postsPerPage()"
+    [currentPage]="currentPage()"
+    (pageChange)="onSetPage($event)"
+  />
 
   @if (store.loading()) {
   <div class="loading-state">
