@@ -1,0 +1,18 @@
+<div class="count-list-container">
+  <div class="list-container">
+    @for (item of countList(); track $index) {
+    <ul>
+      <li>
+        <button
+          (click)="onSetPage($index)"
+          [class.disabled-btn]="$index === currentPage()"
+          [disabled]="$index === currentPage()"
+          class="btn-current-page"
+        >
+          {{ $index + 1 }}
+        </button>
+      </li>
+    </ul>
+    }
+  </div>
+</div>

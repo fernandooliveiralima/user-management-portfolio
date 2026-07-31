@@ -1,0 +1,30 @@
+.count-list-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .list-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  ul {
+    list-style: none;
+
+    li {
+      .disabled-btn {
+        background-color: darkslategray;
+        color: #fff;
+        cursor: not-allowed;
+      }
+
+      .btn-current-page {
+        border: none;
+        outline: none;
+        padding: 0.3rem 0.5rem;
+        border-radius: 0.3rem;
+      }
+    }
+  }
+}

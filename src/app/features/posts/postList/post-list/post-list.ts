@@ -4,11 +4,12 @@ import { lastValueFrom } from 'rxjs';
 import { UserPosts } from '@/shared/services/user-posts/user-posts';
 import { PostStore } from '@/shared/store/posts/post.store';
 import { EditPostModal } from '@/features/posts/edit-post-modal/edit-post-modal';
-import { Posts } from '@/shared/types/posts/posts.model';
+import type { Posts } from '@/shared/types/posts/posts.model';
+import { PaginateList } from '@/features/posts/postList/paginate-list/paginate-list';
 
 @Component({
   selector: 'app-post-list',
-  imports: [EditPostModal],
+  imports: [EditPostModal, PaginateList],
   templateUrl: './post-list.html',
   styleUrl: './post-list.scss',
 })
@@ -19,21 +20,14 @@ export class PostList {
   selectedPostForEdit = signal<Posts | null>(null);
   postsPerPage = signal(10);
   currentPage = signal(0);
-  
-  totalPages = computed<number>(() => Math.ceil(this.store.posts().length / this.postsPerPage()));
-  countList = computed<number[]>(() => Array.from({ length: this.totalPages() }, (_, i) => i));
+
   startPostRange = computed(() => this.currentPage() * this.postsPerPage());
   finalPostRange = computed(() => this.startPostRange() + this.postsPerPage());
   paginatedPosts = computed(() => this.store.posts().slice(this.startPostRange(), this.finalPostRange()));
 
-  onCurrentPage(id: number): boolean {
-    const isCurrentPage = this.currentPage();
-    return isCurrentPage === id;
-  }
-
-  onSetPage(pageIndex: number) { 
+  onSetPage(pageIndex: number) {
     this.currentPage.set(pageIndex);
-  };
+  }
 
   onEditModal(post: Posts) {
     this.selectedPostForEdit.set(post);
