@@ -1,5 +1,5 @@
 describe('Posts - Online (Real API)', () => {
-  it('deve listar posts corretamente vindo da API real', () => {
+  it('should correctly list posts from the real API', () => {
     cy.visit('/', {
       onBeforeLoad(win) {
         win.localStorage.clear();

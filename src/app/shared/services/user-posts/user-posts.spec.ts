@@ -9,7 +9,7 @@ import type { Posts } from '@/shared/types/posts/posts.model';
 describe('UserPosts', () => {
   let service: UserPosts;
   let httpMock: HttpTestingController;
-  const mockUrl = `${environment.apiUrl}/posts`;
+  const mockUrl = `${environment.apiUrl}posts`;
 
   const mockPosts: Posts[] = [
     { userId: 1, id: 1, title: 'Post 1', content: 'Conteúdo 1' } as unknown as Posts,

@@ -1,4 +1,4 @@
-<div class="count-list-container">
+<div class="count-list-container" data-cy="pagination-container">
   <div class="list-container">
     @for (item of countList(); track $index) {
     <ul>
@@ -8,7 +8,8 @@
           [class.disabled-btn]="$index === currentPage()"
           [disabled]="$index === currentPage()"
           class="btn-current-page"
-        >
+          data-cy="page-button">
+            
           {{ $index + 1 }}
         </button>
       </li>
